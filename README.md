@@ -1,8 +1,28 @@
 # Rux
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rux`. To experiment with that code, run `bin/console` for an interactive prompt.
+A Ruby port of Emac's `rx` library. `rx` allows you to construct regular expressions using human-readable functions (ymmv).
 
-TODO: Delete this and the text above, and describe your gem
+## Example
+
+Consider words ending with `at` (e.g. cat, bat, fat, flat, mat, etc.). A regex might look like `/\b[a-z]at\b/`.
+
+In `rx`, you might write something like this: `(rx bol (one-or-more letter) "at" eol)`.
+
+In `rux`, this could be written:
+
+```
+rux do
+  bow
+  one_or_more letters
+  string "at"
+  eow
+end
+```
+
+`bow` is "beginning of word" and is aliased to `word_start`.
+
+As the regex grows in complexity, the `rux` DSL starts to shine.
+
 
 ## Installation
 

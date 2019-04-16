@@ -1,9 +1,9 @@
 RSpec.describe Rux do
-  it "has a version number" do
-    expect(Rux::VERSION).not_to be nil
-  end
+  describe ".rux" do
+    it "returns a Regexp" do
+      regexp = Rux.rux
 
-  it "does something useful" do
-    expect(false).to eq(true)
+      expect(regexp).to be_a(Regexp)
+    end
   end
 end
