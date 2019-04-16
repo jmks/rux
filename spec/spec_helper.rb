@@ -14,3 +14,11 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+RSpec::Matchers.define :build_regex do |actual|
+  match do |builder|
+    regexp = builder.build
+
+    expect(regexp.source).to eq(actual)
+  end
+end

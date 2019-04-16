@@ -8,9 +8,7 @@ module Rux
           word_start
         end
 
-        regexp = builder.build
-
-        expect(regexp.source).to eq "\\b"
+        expect(builder).to build_regex "\\b"
       end
     end
 
@@ -21,9 +19,7 @@ module Rux
             one_or_more "a"
           end
 
-          regexp = builder.build
-
-          expect(regexp.source).to eq "a+"
+          expect(builder).to build_regex "a+"
         end
       end
     end
@@ -34,9 +30,7 @@ module Rux
           literal "a"
         end
 
-        regexp = builder.build
-
-        expect(regexp.source).to eq "a"
+        expect(builder).to build_regex "a"
       end
 
       it "escapes special values" do
@@ -44,9 +38,7 @@ module Rux
           literal "\*?{}."
         end
 
-        regexp = builder.build
-
-        expect(regexp.source).to eq "\\*\\?\\{\\}\\."
+        expect(builder).to build_regex "\\*\\?\\{\\}\\."
       end
     end
   end
