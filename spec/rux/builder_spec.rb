@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Rux
   RSpec.describe Builder do
-    describe "#word_start or #bow" do
+    describe "#word_start" do
       it "adds a word boundary" do
         builder = Builder.new do
           word_start

@@ -10,6 +10,9 @@ module Rux
     def word_start
       @regexps << "\\b"
     end
+    alias_method :word_end, :word_start
+    alias_method :bow, :word_start
+    alias_method :eow, :word_start
 
     def one_or_more(regexp)
       @regexps << "#{regexp}+"
