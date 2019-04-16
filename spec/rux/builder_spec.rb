@@ -27,5 +27,27 @@ module Rux
         end
       end
     end
+
+    describe "#literal" do
+      it "adds a literal string" do
+        builder = Builder.new do
+          literal "a"
+        end
+
+        regexp = builder.build
+
+        expect(regexp.source).to eq "a"
+      end
+
+      it "escapes special values" do
+        builder = Builder.new do
+          literal "\*?{}."
+        end
+
+        regexp = builder.build
+
+        expect(regexp.source).to eq "\\*\\?\\{\\}\\."
+      end
+    end
   end
 end

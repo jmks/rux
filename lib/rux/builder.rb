@@ -18,6 +18,10 @@ module Rux
       @regexps << "#{regexp}+"
     end
 
+    def literal(string)
+      @regexps << Regexp.escape(string)
+    end
+
     def build
       Regexp.new(@regexps.join)
     end
