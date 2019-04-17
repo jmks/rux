@@ -22,6 +22,21 @@ module Rux
       @regexps << Regexp.escape(string)
     end
 
+    def letters
+      "[a-zA-Z]"
+    end
+    alias_method :letter, :letters
+
+    def numbers
+      "[0-9]"
+    end
+    alias_method :number, :numbers
+
+    def whitespace
+      "\s"
+    end
+    alias_method :space, :whitespace
+
     def build
       Regexp.new(@regexps.join)
     end

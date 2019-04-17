@@ -11,10 +11,10 @@ In `rx`, you might write something like this: `(rx bol (one-or-more letter) "at"
 In `rux`, this could be written:
 
 ```
-rux do
+Rux.rux do
   bow
   one_or_more letters
-  string "at"
+  literal "at"
   eow
 end
 ```

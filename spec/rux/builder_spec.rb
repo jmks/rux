@@ -41,5 +41,19 @@ module Rux
         expect(builder).to build_regex "\\*\\?\\{\\}\\."
       end
     end
+
+    describe "convenience groups" do
+      specify "#letters to match a-zA-Z" do
+        expect(Builder.new.letters).to eq "[a-zA-Z]"
+      end
+
+      specify "#numbers to match 0-9" do
+        expect(Builder.new.numbers).to eq "[0-9]"
+      end
+
+      specify "#whitespace to match \s" do
+        expect(Builder.new.whitespace).to eq "\s"
+      end
+    end
   end
 end
