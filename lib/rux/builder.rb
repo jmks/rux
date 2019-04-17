@@ -30,9 +30,19 @@ module Rux
       @regexps << Regexp.escape(string)
     end
 
-    def group(name = nil, &block)
+    def group(name = nil, capture: true, &block)
       captured = Builder.new(&block).build
-      wrapped = name ? "(?<#{name}>#{captured.source})" : "(#{captured.source})"
+
+      capture_start, capture_end =
+        if name
+          %W[(?<#{name}> )]
+        elsif capture
+          %w[( )]
+        else
+          %w[(?: )]
+        end
+
+      wrapped = [capture_start, captured.source, capture_end]
 
       @regexps << wrapped
     end

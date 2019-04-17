@@ -123,6 +123,18 @@ module Rux
 
         expect(builder).to build_regex "health:\s(?<health>[0-9]+)"
       end
+
+      context "with the capture option as false" do
+        it "produces a non-capture group" do
+          builder = Builder.new do
+            group(capture: false) do
+              literal "abc"
+            end
+          end
+
+          expect(builder).to build_regex "(?:abc)"
+        end
+      end
     end
   end
 end
