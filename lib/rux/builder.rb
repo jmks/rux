@@ -72,6 +72,10 @@ module Rux
       @regexps << ["[^", *literals, "]"].join
     end
 
+    def one_of(*literals)
+      @regexps << literals.join("|")
+    end
+
     def letters
       "[a-zA-Z]"
     end

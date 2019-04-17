@@ -192,5 +192,15 @@ module Rux
         expect(builder).to build_regex "[^A-Z]"
       end
     end
+
+    describe "#one_of" do
+      it "produces alternation of literals" do
+        builder = Builder.new do
+          one_of "one", "two"
+        end
+
+        expect(builder).to build_regex "one|two"
+      end
+    end
   end
 end
