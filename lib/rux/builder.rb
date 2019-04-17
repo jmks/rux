@@ -32,22 +32,27 @@ module Rux
       @regexps << Regexp.escape(string)
     end
 
-    def group(name = nil, capture: true, &block)
+    def group(name = nil, &block)
       inner_regexp = build_nested(&block)
 
       capture_start, capture_end =
         if name
           %W[(?<#{name}> )]
-        elsif capture
-          %w[( )]
         else
-          %w[(?: )]
+          %w[( )]
         end
 
       wrapped = [capture_start, inner_regexp, capture_end]
 
       @regexps << wrapped
     end
+
+    def noncapturing_group(&block)
+      inner_regexp = build_nested(&block)
+
+      @regexps << ["(?:", inner_regexp, ")"]
+    end
+    alias_method :nc_group, :noncapturing_group
 
     def letters
       "[a-zA-Z]"

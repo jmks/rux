@@ -27,7 +27,7 @@ module Rux
         it "adds a plus" do
           builder = Builder.new do
             one_or_more do
-              group(capture: false) do
+              nc_group do
                 literal "abc"
               end
             end
@@ -137,17 +137,17 @@ module Rux
 
         expect(builder).to build_regex "health:\s(?<health>[0-9]+)"
       end
+    end
 
-      context "with the capture option as false" do
-        it "produces a non-capture group" do
-          builder = Builder.new do
-            group(capture: false) do
-              literal "abc"
-            end
+    describe "#noncapturing_group" do
+      it "produces a non-capture group" do
+        builder = Builder.new do
+          noncapturing_group do
+            literal "abc"
           end
-
-          expect(builder).to build_regex "(?:abc)"
         end
+
+        expect(builder).to build_regex "(?:abc)"
       end
     end
   end
