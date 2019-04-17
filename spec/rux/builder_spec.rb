@@ -12,6 +12,28 @@ module Rux
       end
     end
 
+    describe "#line_start" do
+      it "adds ^" do
+        builder = Builder.new do
+          line_start
+          literal "first_word"
+        end
+
+        expect(builder).to build_regex "^first_word"
+      end
+    end
+
+    describe "#line_end" do
+      it "adds $" do
+        builder = Builder.new do
+          literal "last_word"
+          line_end
+        end
+
+        expect(builder).to build_regex "last_word$"
+      end
+    end
+
     describe "#one_or_more" do
       context "given a parameter" do
         it "adds a plus" do

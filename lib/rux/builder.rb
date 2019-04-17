@@ -14,6 +14,16 @@ module Rux
     alias_method :bow, :word_start
     alias_method :eow, :word_start
 
+    def line_start
+      @regexps << "^"
+    end
+    alias_method :bol, :line_start
+
+    def line_end
+      @regexps << "$"
+    end
+    alias_method :eol, :line_end
+
     def one_or_more(regexp = nil, &block)
       inner_regexp = block_given? ? build_nested(&block) : regexp
 
