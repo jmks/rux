@@ -15,7 +15,7 @@ module Rux
     alias_method :eow, :word_start
 
     def one_or_more(regexp = nil, &block)
-      inner_regexp = block_given? ? Builder.new(&block).build.source : regexp
+      inner_regexp = block_given? ? build_nested(&block) : regexp
 
       @regexps << "#{inner_regexp}+"
     end
@@ -33,7 +33,7 @@ module Rux
     end
 
     def group(name = nil, capture: true, &block)
-      captured = Builder.new(&block).build
+      inner_regexp = build_nested(&block)
 
       capture_start, capture_end =
         if name
@@ -44,7 +44,7 @@ module Rux
           %w[(?: )]
         end
 
-      wrapped = [capture_start, captured.source, capture_end]
+      wrapped = [capture_start, inner_regexp, capture_end]
 
       @regexps << wrapped
     end
@@ -66,6 +66,12 @@ module Rux
 
     def build
       Regexp.new(@regexps.join)
+    end
+
+    private
+
+    def build_nested(&block)
+      Builder.new(&block).build.source
     end
   end
 end
