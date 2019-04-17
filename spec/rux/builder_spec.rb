@@ -182,5 +182,15 @@ module Rux
         expect(builder).to build_regex "[A-Zq1-3]"
       end
     end
+
+    describe "#not_within" do
+      it "produces a negated character class" do
+        builder = Builder.new do
+          not_within "A-Z"
+        end
+
+        expect(builder).to build_regex "[^A-Z]"
+      end
+    end
   end
 end
