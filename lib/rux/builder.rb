@@ -64,6 +64,12 @@ module Rux
     end
     alias_method :nc_group, :noncapturing_group
 
+    def within(*literals)
+      literals.unshift("[").push("]")
+
+      @regexps << literals.join
+    end
+
     def letters
       "[a-zA-Z]"
     end

@@ -172,5 +172,15 @@ module Rux
         expect(builder).to build_regex "(?:abc)"
       end
     end
+
+    describe "#within" do
+      it "produces a character class" do
+        builder = Builder.new do
+          within "A-Z", "q", "1-3"
+        end
+
+        expect(builder).to build_regex "[A-Zq1-3]"
+      end
+    end
   end
 end
