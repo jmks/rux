@@ -24,6 +24,18 @@ module Rux
       end
     end
 
+    describe "#zero_or_more" do
+      context "given a string" do
+        it "adds a star" do
+          builder = Builder.new do
+            zero_or_more "a"
+          end
+
+          expect(builder).to build_regex "a*"
+        end
+      end
+    end
+
     describe "#literal" do
       it "adds a literal string" do
         builder = Builder.new do

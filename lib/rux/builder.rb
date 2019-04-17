@@ -18,6 +18,10 @@ module Rux
       @regexps << "#{regexp}+"
     end
 
+    def zero_or_more(regexp)
+      @regexps << "#{regexp}*"
+    end
+
     def literal(string)
       @regexps << Regexp.escape(string)
     end
