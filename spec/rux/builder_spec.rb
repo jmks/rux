@@ -13,13 +13,27 @@ module Rux
     end
 
     describe "#one_or_more" do
-      context "given a string" do
+      context "given a parameter" do
         it "adds a plus" do
           builder = Builder.new do
             one_or_more "a"
           end
 
           expect(builder).to build_regex "a+"
+        end
+      end
+
+      context "given a block" do
+        it "adds a plus" do
+          builder = Builder.new do
+            one_or_more do
+              group(capture: false) do
+                literal "abc"
+              end
+            end
+          end
+
+          expect(builder).to build_regex "(?:abc)+"
         end
       end
     end
