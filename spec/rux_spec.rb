@@ -1,14 +1,14 @@
 RSpec.describe Rux do
-  describe ".rux" do
+  describe ".build" do
     it "returns a Regexp" do
-      regexp = Rux.rux
+      regexp = Rux.build
 
       expect(regexp).to be_a(Regexp)
     end
 
     describe "building a regexp for words with length >= 3 and ending with 'at'" do
       subject(:regexp) do
-        Rux.rux do
+        Rux.build do
           bow
           one_or_more letters
           literal "at"
