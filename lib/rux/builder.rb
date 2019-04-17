@@ -22,6 +22,13 @@ module Rux
       @regexps << Regexp.escape(string)
     end
 
+    def group(name = nil, &block)
+      captured = Builder.new(&block).build
+      wrapped = name ? "(?<#{name}>#{captured.source})" : "(#{captured.source})"
+
+      @regexps << wrapped
+    end
+
     def letters
       "[a-zA-Z]"
     end
@@ -33,7 +40,7 @@ module Rux
     alias_method :number, :numbers
 
     def whitespace
-      "\s"
+      @regexps << "\s"
     end
     alias_method :space, :whitespace
 

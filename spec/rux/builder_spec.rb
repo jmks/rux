@@ -42,6 +42,16 @@ module Rux
       end
     end
 
+    describe "#whitespace" do
+      it "adds a whitespace \s" do
+        builder = Builder.new do
+          whitespace
+        end
+
+        expect(builder).to build_regex "\s"
+      end
+    end
+
     describe "convenience groups" do
       specify "#letters to match a-zA-Z" do
         expect(Builder.new.letters).to eq "[a-zA-Z]"
@@ -50,9 +60,44 @@ module Rux
       specify "#numbers to match 0-9" do
         expect(Builder.new.numbers).to eq "[0-9]"
       end
+    end
 
-      specify "#whitespace to match \s" do
-        expect(Builder.new.whitespace).to eq "\s"
+    describe "#group" do
+      it "captures groups" do
+        builder = Builder.new do
+          group do
+            one_or_more "a"
+            literal "bc"
+          end
+        end
+
+        expect(builder).to build_regex "(a+bc)"
+      end
+
+      it "captures nested regexps" do
+        builder = Builder.new do
+          group do
+            literal "n"
+            group do
+              literal "an"
+            end
+            literal "a"
+          end
+        end
+
+        expect(builder).to build_regex "(n(an)a)"
+      end
+
+      it "captures named groups" do
+        builder = Builder.new do
+          literal "health:"
+          space
+          group "health" do
+            one_or_more numbers
+          end
+        end
+
+        expect(builder).to build_regex "health:\s(?<health>[0-9]+)"
       end
     end
   end
