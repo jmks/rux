@@ -36,6 +36,18 @@ module Rux
       end
     end
 
+    describe "#zero_or_one" do
+      context "given a string" do
+        it "adds a ?" do
+          builder = Builder.new do
+            zero_or_one "a"
+          end
+
+          expect(builder).to build_regex "a?"
+        end
+      end
+    end
+
     describe "#literal" do
       it "adds a literal string" do
         builder = Builder.new do
