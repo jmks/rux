@@ -15,12 +15,9 @@ module Rux
     alias_method :eow, :word_start
 
     def one_or_more(regexp = nil, &block)
-      if block_given?
-        captured = Builder.new(&block).build
-        @regexps << "#{captured.source}+"
-      else
-        @regexps << "#{regexp}+"
-      end
+      inner_regexp = block_given? ? Builder.new(&block).build.source : regexp
+
+      @regexps << "#{inner_regexp}+"
     end
 
     def zero_or_more(regexp)
