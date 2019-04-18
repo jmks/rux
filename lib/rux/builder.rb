@@ -84,6 +84,8 @@ module Rux
     def numbers
       "[0-9]"
     end
+    alias_method :digits, :numbers
+    alias_method :digit, :numbers
     alias_method :number, :numbers
 
     def whitespace
