@@ -37,6 +37,7 @@ module Rux
     def zero_or_one(regexp)
       @regexps << "#{regexp}?"
     end
+    alias_method :optional, :zero_or_one
 
     def literal(string)
       @regexps << Regexp.escape(string)
